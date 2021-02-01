@@ -20,7 +20,11 @@ class _CustomScaffoldState extends State<CustomScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: widget.appBar ?? AppBar(title: Text(widget.titleAppBar ?? "")),
+      appBar: widget.appBar ??
+          AppBar(
+            title: Text(widget.titleAppBar ?? ""),
+            centerTitle: true,
+          ),
       body: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () => FocusScope.of(context).unfocus(),

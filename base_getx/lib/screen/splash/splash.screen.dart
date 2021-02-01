@@ -10,14 +10,20 @@ class SplashScreen extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+        titleAppBar: "Demo Get-X",
         body: GestureDetector(
             onTap: () {
-              openDialog1(onConfirm: () {}, onCancel: () {});
+              controller.updateCounter();
+              if (controller.counter % 2 == 0)
+                Get.updateLocale(Locale('ja', 'JP'));
+              else
+                Get.updateLocale(Locale('en', 'US'));
             },
             child: Column(
               children: [
                 Text(getLocalize(helloLang)),
-                Text('${controller.counter}')
+                Obx(() => Text('${controller.counter}')),
+                Obx(() => Text('${controller.login}'))
               ],
             )));
   }
