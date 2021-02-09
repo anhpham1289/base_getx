@@ -1,10 +1,12 @@
 import 'package:base_getx/@core/data/api/user.api.dart';
 import 'package:base_getx/@core/data/local/storage/data.storage.dart';
+import 'package:base_getx/@core/data/repo/user.repo.dart';
+import 'package:base_getx/@core/router/pages.dart';
+import 'package:base_getx/@share/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController with WidgetsBindingObserver {
-
   var counter = 0.obs;
 
   var login = "".obs;
@@ -32,15 +34,18 @@ class SplashController extends GetxController with WidgetsBindingObserver {
   }
 
   getData() async {
-    var _userRepo = Get.find<UserApi>();
-    await _userRepo.getList();
+    var _userRepo = Get.find<UserRepo>();
+    var res = await _userRepo.loginManual(
+        email: 'gumitest.bizon05@gmail.com', password: 'Gumi7393');
+    if (res != null) Get.find<DataStorage>().setToken(res.accessToken);
+    login.value = '${Get.find<DataStorage>().getToken()}';
+    goTo(screen: ROUTER_HOME, argument: login.value);
   }
 
   @override
   void onReady() {
     super.onReady();
     Get.log("onReady");
-    _login();
     getData();
   }
 
@@ -49,12 +54,5 @@ class SplashController extends GetxController with WidgetsBindingObserver {
     Get.log("onClose");
     WidgetsBinding.instance.removeObserver(this);
     super.onClose();
-  }
-
-  _login() async {
-    var _storage = Get.find<DataStorage>();
-    // await _storage.setLogin('login Storage');
-    // await _storage.setToken('abcdef');
-    login.value = '${_storage.getLogin()} -- ${_storage.getToken()}';
   }
 }
