@@ -1,5 +1,5 @@
+import 'package:base_getx/@core/router/pages.dart';
 import 'package:base_getx/@core/router/router.dart';
-import 'package:base_getx/@share/constants/router.constant.dart';
 import 'package:base_getx/@share/localize/localize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +9,7 @@ class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      navigatorKey: Get.key,
       theme: _applicationTheme(),
       defaultTransition: Transition.fadeIn,
       initialRoute: ROUTER_SPLASH,

@@ -1,7 +1,10 @@
+import 'package:base_getx/@core/data/api/user.api.dart';
+import 'package:base_getx/@core/data/local/storage/data.storage.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
-class SplashController extends GetxController {
+class SplashController extends GetxController with WidgetsBindingObserver {
+
   var counter = 0.obs;
 
   var login = "".obs;
@@ -11,32 +14,47 @@ class SplashController extends GetxController {
   }
 
   @override
-  void onInit() {
-    Get.log("onInit");
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // TODO: implement didChangeAppLifecycleState
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.resumed) updateCounter();
+  }
 
-    /// Called first time the variable $_ is changed
+  @override
+  void onInit() {
+    WidgetsBinding.instance.addObserver(this);
+    Get.log("onInit");
     once(counter, (_) => print("$_ was changed once (once)"));
-    /// Anti DDos - Called every time the user stops typing for 1 second, for example.
     debounce(counter, (_) => print("debouce$_ (debounce)"),
         time: Duration(seconds: 1));
     ever(counter, (_) => print("$_ has been changed (ever)"));
-    GetStorage box = GetStorage();
-      box.write("login", "login");
     super.onInit();
+  }
+
+  getData() async {
+    var _userRepo = Get.find<UserApi>();
+    await _userRepo.getList();
   }
 
   @override
   void onReady() {
     super.onReady();
     Get.log("onReady");
-    GetStorage box = GetStorage();
-    login.value = box.read('login');
+    _login();
+    getData();
   }
 
   @override
   void onClose() {
     Get.log("onClose");
+    WidgetsBinding.instance.removeObserver(this);
     super.onClose();
   }
 
+  _login() async {
+    var _storage = Get.find<DataStorage>();
+    // await _storage.setLogin('login Storage');
+    // await _storage.setToken('abcdef');
+    login.value = '${_storage.getLogin()} -- ${_storage.getToken()}';
+  }
 }

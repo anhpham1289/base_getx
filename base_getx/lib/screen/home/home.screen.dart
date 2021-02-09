@@ -1,11 +1,10 @@
+import 'package:base_getx/screen/home/home.controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
+class HomeScreen extends GetWidget<HomeController> {
 
-class _HomeScreenState extends State<HomeScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Container(

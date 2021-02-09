@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SplashScreen extends GetView<SplashController> {
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -23,7 +24,7 @@ class SplashScreen extends GetView<SplashController> {
               children: [
                 Text(getLocalize(helloLang)),
                 Obx(() => Text('${controller.counter}')),
-                Obx(() => Text('${controller.login}'))
+                Obx(() => Text('${controller.login}')),
               ],
             )));
   }
