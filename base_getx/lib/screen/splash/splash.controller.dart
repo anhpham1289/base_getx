@@ -1,4 +1,3 @@
-import 'package:base_getx/@core/data/api/user.api.dart';
 import 'package:base_getx/@core/data/local/storage/data.storage.dart';
 import 'package:base_getx/@core/data/repo/user.repo.dart';
 import 'package:base_getx/@core/router/pages.dart';

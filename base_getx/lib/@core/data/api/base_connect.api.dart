@@ -1,6 +1,7 @@
 import 'package:base_getx/@core/data/local/storage/data.storage.dart';
 import 'package:base_getx/@core/data/repo/response/base.response.dart';
 import 'package:base_getx/@share/constants/value.constant.dart';
+import 'package:base_getx/@share/utils/util.dart';
 import 'package:get/get.dart';
 import 'package:global_configuration/global_configuration.dart';
 
@@ -24,16 +25,16 @@ class BaseConnect extends GetConnect {
       });
   }
 
-  Future<BaseResponse> getResponse(String url,
-      {Map<String, dynamic> query, Decoder decoder}) async {
+  Future<BaseResponse> getResponse(String url, {dynamic query}) async {
     Get.log('[QUERY] : $query');
-    var response = await this
-        .get(url, query: query, decoder: (map) => BaseResponse.fromMap(map));
+    var response = await get(url,
+        query: query, decoder: (map) => BaseResponse.fromMap(map));
     if (response.isOk) {
       Get.log('[RESPONSE] : ${response.body.toMap()}');
       return response.body;
     } else {
       dispose();
+      hideLoading();
       return BaseResponse(
           success: false,
           message: response.statusText,
@@ -41,16 +42,16 @@ class BaseConnect extends GetConnect {
     }
   }
 
-  Future<BaseResponse> postRequest(String url,
-      {Map<String, dynamic> body, Decoder decoder}) async {
+  Future<BaseResponse> postRequest(String url, {dynamic body}) async {
     Get.log('[BODY] : ${body.toString()}');
     var response =
-        await this.post(url, body, decoder: (map) => BaseResponse.fromMap(map));
+        await post(url, body, decoder: (map) => BaseResponse.fromMap(map));
     if (response.isOk) {
       Get.log('[RESPONSE] : ${response.body.toMap()}');
       return response.body;
     } else {
       dispose();
+      hideLoading();
       return BaseResponse(
           success: false,
           message: response.statusText,

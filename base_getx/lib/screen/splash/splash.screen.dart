@@ -1,3 +1,4 @@
+import 'package:base_getx/@core/router/pages.dart';
 import 'package:base_getx/@share/constants/language.constant.dart';
 import 'package:base_getx/@share/utils/util.dart';
 import 'package:base_getx/@share/widget/scaffold.widget.dart';
@@ -7,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SplashScreen extends GetView<SplashController> {
-
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -19,6 +19,7 @@ class SplashScreen extends GetView<SplashController> {
                 Get.updateLocale(Locale('ja', 'JP'));
               else
                 Get.updateLocale(Locale('en', 'US'));
+              goTo(screen: ROUTER_HOME, argument: controller.login.value);
             },
             child: Column(
               children: [

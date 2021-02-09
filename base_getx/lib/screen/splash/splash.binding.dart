@@ -7,9 +7,9 @@ import 'package:get/get.dart';
 class SplashBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(SplashController());
+    Get.lazyPut(() => SplashController());
     Get.lazyPut(() => DataStorage());
     Get.lazyPut(() => UserApi());
-    Get.lazyPut(() => UserRepo(userApi: Get.find()));
+    Get.lazyPut(() => UserRepo(Get.find()));
   }
 }

@@ -1,4 +1,6 @@
+import 'package:base_getx/@share/constants/language.constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 getLocalize(String key, {List<String> args}) => key.trArgs(args);
@@ -21,3 +23,11 @@ getArgument() => Get.arguments;
 
 openDialog({@required Widget dialog, bool dismiss = false}) =>
     Get.dialog(dialog, barrierDismissible: dismiss);
+
+showToast(String content) =>
+    EasyLoading.showToast(getLocalize(content) ?? content);
+
+showLoading([String content]) => EasyLoading.show(
+    status: content != null ? getLocalize(content) : getLocalize(loading));
+
+hideLoading() => EasyLoading.dismiss();
