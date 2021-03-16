@@ -1,3 +1,4 @@
+import 'package:base_getx/@core/binding/app.binding.dart';
 import 'package:base_getx/@core/router/pages.dart';
 import 'package:base_getx/@core/router/router.dart';
 import 'package:base_getx/@share/localize/localize.dart';
@@ -25,6 +26,7 @@ class _ApplicationState extends State<Application> {
     return GetMaterialApp(
       navigatorKey: Get.key,
       theme: _applicationTheme(),
+      initialBinding: AppBinding(),
       defaultTransition: Transition.fadeIn,
       builder: (_, child) => FlutterEasyLoading(child: child),
       initialRoute: ROUTER_SPLASH,

@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   var userName = ''.obs;
 
+  var _userRepo = Get.find<UserRepo>();
+
   @override
   void onInit() {
     super.onInit();
@@ -23,7 +25,6 @@ class HomeController extends GetxController {
 
   _getMyPage() async {
     showLoading();
-    var _userRepo = Get.find<UserRepo>();
     var res = await _userRepo.getMyPage();
     hideLoading();
     userName.value = res.name;

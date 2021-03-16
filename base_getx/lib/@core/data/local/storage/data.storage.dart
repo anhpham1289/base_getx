@@ -17,4 +17,5 @@ class DataStorage {
   setToken(String value) async => await _storage.write(_token, value);
 
   getToken() => _storage.read(_token);
+
 }

@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../RPSCustomPainter.dart';
+
 class SplashScreen extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,12 @@ class SplashScreen extends GetView<SplashController> {
                 Text(getLocalize(helloLang)),
                 Obx(() => Text('${controller.counter}')),
                 Obx(() => Text('${controller.login}')),
+                Container(
+                  child: CustomPaint(
+                    size: Size(500,(500*0.5).toDouble()),
+                    painter: RPSCustomPainter(),
+                  ),
+                )
               ],
             )));
   }
