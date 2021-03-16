@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends GetWidget<HomeController> {
+  String aws = "AK23123IALALEMEL33243OLIA";
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
